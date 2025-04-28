@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Détection d'objets en temps réel</h2>
+
+  <div class="video-container">
+    <video #video id="webcam" autoplay playsinline></video>
+    <canvas #canvas id="output-canvas"></canvas>
+  </div>
+
+  <div class="controls">
+    <button (click)="startWebcam()" [disabled]="isWebcamStarted">Démarrer la webcam</button>
+    <button (click)="stopWebcam()" [disabled]="!isWebcamStarted">Arrêter la webcam</button>
+  </div>
+
+  @if (predictions.length > 0) {
+    <div class="results">
+      <h3>Objets détectés:</h3>
+      <ul>
+        @for (prediction of predictions; track prediction) {
+          <li>
+            {{ prediction.class }} ({{ (prediction.score * 100).toFixed(2) }}%)
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+</div>
